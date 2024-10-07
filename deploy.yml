@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hotstar_clone
+  name: hotstar
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: hotstar_clone
+  template:
+    metadata:
+      labels:
+        app: hotstar_clone
+    spec:
+      containers:
+      - name: cont1
+        image: abishnu08/hotstar:latest
+        ports:
+          - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bishnu
+spec:
+  type: LoadBalancer
+  selector:
+    app: hotstar_clone
+  ports:
+    - port: 80
+      targetPort: 80
